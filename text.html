@@ -1,0 +1,137 @@
+<script scr="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
+<main id="main-doc">
+  <nav id="navbar">
+    <div class="divider"></div>
+    <header>Progressive Web Apps (PWAs)</header>
+    <ul>
+      <li><a class="nav-link" href="#Introduction">Introduction</a></li>
+      <li><a class="nav-link" href="#App_structure">App structure</a></li>
+      <li><a class="nav-link" href="#Building_blocks">Building blocks</a></li>
+      <li><a class="nav-link" href="#Offline_Service">Offline Service</a></li>
+      <li><a class="nav-link" href="#How_to_make_PWAs_installable">How to make PWAs installable</a></li>
+    </ul>
+  </nav>
+  
+  <div class="content">
+    <section id="Introduction" class="main-section">
+      <header>Introduction</header>
+      <p>
+        <code>What is a Progressive Web App?</code><br>    PWAs are web apps developed using a number of specific technologies and standard patterns to allow them to take advantage of both web and native app features. For example, web apps are more discoverable than native apps; it's a lot easier and faster to visit a website than to install an application, and you can also share web apps by sending a link.<br>
+
+On the other hand, native apps are better integrated with the operating system and therefore offer a more seamless experience for the users. You can install a native app so that it works offline, and users love tapping their icons to easily access their favorite apps, rather than navigating to it using a browser.<br>
+
+PWAs give us the ability to create web apps that can enjoy these same advantages.<br>
+
+It's not a brand new concept—such ideas have been revisited many times on the web platform with various approaches in the past. Progressive Enhancement and responsive design already allow us to build mobile friendly websites.<br>
+
+PWAs, however, provide all this and more without losing any of the existing features that make the web great.
+      </p>
+    There are some key principles a web app should try to observe to be identified as a PWA. It should be:  
+      <ul>
+        <li>Discoverable</li>
+        <li>Installable</li>
+        <li>Linkable</li>
+        <li>Network independent</li>
+        <li>Progressively enhanced</li>
+        <li>Re-engageable</li>
+        <li>Responsively designed</li>
+        <li>Secure</li>
+      </ul>
+       <p>
+        <code>Browser support</code><br>
+     As mentioned before, PWAs don't depend on a single API, but rather using various technologies to achieve the goal of delivering the best web experience possible.<br>
+
+The key ingredient required for PWAs is service worker support. Thankfully service workers are now supported on all major browsers on desktop and mobile.<br>
+
+Other features such as Web App Manifest, Push Notifications, and Add to Home Screen functionality have wide support too. Currently, Safari has limited support for Web App Manifest and Add to Home Screen and no support for web push notifications. However, other major browsers support all these features.<br>
+
+<i>Above all you should follow the progressive enhancement rule:</i> <br>Use technologies that enhance the appearance and utility of your app when they're available, but still offer the basic functionality of your app when those features are unavailable. Presenting a trusted website with a good performance is a consequence of using these enhancements; this in turn means building web apps which follow better practices. This way everybody will be able to use the app, but those with modern browsers will benefit from PWA features even more.
+    </section>  
+    <section id="App_structure" class="main-section">
+      <header>App structure</header>
+      <p>
+        <code>Architecture of an app</code><br>
+        There are two main, different approaches to rendering a website — on the server or on the client. They both have their advantages and disadvantages, and you can mix the two approaches to some degree.
+      </p>
+      
+      <ul>
+        <li>Server-side rendering (SSR) means a website is rendered on the server, so it offers quicker first load, but navigating between pages requires downloading new HTML content. It works great across browsers, but it suffers in terms of time navigating between pages and therefore general perceived performance — loading a page requires a new round trip to the server.</li>
+        <li>Client-side rendering (CSR) allows the website to be updated in the browser almost instantly when navigating to different pages, but requires more of an initial download hit and extra rendering on the client at the beginning. The website is slower on an initial visit, but can be faster to navigate.</li>
+        </ul>
+       <p>
+         Mixing SSR with CSR can lead to the best results — you can render a website on the server, cache its contents, and then update the rendering on the client-side as and when needed. The first page load is quick because of the SSR, and the navigation between pages is smooth because the client can re-render the page with only the parts that have changed. <br>
+
+<br>PWAs can be built using any approach you like, but some will work better than the others. The most popular approach is the "app shell" concept, which mixes SSR and CSR in exactly the way described above, and in addition follows the "offline first" methodology which we will explain in detail in upcoming articles and use in our example application. There is also a new approach involving the Streams API, which we'll mention briefly.</p><br>
+        <code>Being linkable, progressive and responsive</code><br>
+      <p>It's important to remember the PWA advantages and keep them in mind when designing the application. The app shell approach allows websites to be:</p>
+      <ol>
+        <li>Linkable: Even though it behaves like a native app, it is still a website — you can click on the links within the page and send a URL to someone if you want to share it.</li>
+        <li>Progressive: Start with the "good, old basic website” and progressively add new features while remembering to detect if they are available in the browser and gracefully handle any errors that crop up if support is not available. For example, an offline mode with the help of service workers is just an extra trait that makes the website experience better, but it's still perfectly usable without it.</li>
+        <li>Responsive: Responsive web design also applies to progressive web apps, as both are mainly for mobile devices. There are so many varied devices with browsers — it's important to prepare your website so it works on different screen sizes, viewports or pixel densities, using technologies like viewport meta tag, CSS media queries, Flexbox, and CSS Grid.</li>
+    
+      </ol>
+    </section>  
+    <section id="Building_blocks" class="main-section">
+      <header>Building blocks</header><br><p>In this article we will discuss the main essential components of responsive design, with some links to further information where necessary.<br>
+
+For Web developers, it is now fairly common to be called upon to create a Web site or app that changes its user interface depending on the browser or device accessing the site to provide an optimized experience. One approach to this is to create different versions of your site/app for different platforms or browsers and serve them appropriately after detecting which browser or platform is looking at your site. But this is increasingly inefficient: browser sniffing is inherently error prone, and maintaining multiple copies of your code can turn out to be a nightmare.<br>
+
+It is usually much better to create a single version of your code which doesn't care about what browser or platform is accessing the site, but instead uses feature tests to find out what code features the browser supports or what the values of certain browser features are, and then adjusts the code appropriately. This tends to be termed responsive design or adaptive design, two related but different approaches. For a discussion on the differences between the two, read Responsive design versus adaptive design.<br>
+
+This is much more reliable, more maintainable, and more future proof. You don't get caught in the situation of having to bring out more new site versions as more new browsers and platforms come out, and adjust code as feature support in existing browsers changes.<br>
+
+There are disadvantages to this approach as well. If the content, layout, and functionality need to change greatly for different devices, it may not be such a good approach. Also, taking an existing site and adding responsiveness to it, to make it mobile/tablet friendly, can be a lot more effort than just creating a separate mobile site or app, especially if it is a sprawling enterprise site. Read more about responsive design advantages and disadvantages.</p>
+
+
+      <p>
+        <code>Fluid grids</code><br>
+       The best place to start is with fluid measurements for our application layout — essentially, this means using a combination of percentages and ems/rems to size your containers and text, not fixed widths such as pixels. This has a lot of advantages in that the layout will adapt to different viewport dimensions.<br>
+
+      </p>
+      <p>
+        <code>Responsive images/video</code><br>
+        Another problem that comes up more and more these days is making image/video weight (size in KB) responsive as well as the dimensions of the image on screen. Yes, you want the images to be contained inside the app UI whether you are using it on desktop or mobile, but you should also consider that mobile apps have much smaller viewport dimensions available than desktop apps, so you should try to give mobile devices a smaller image to download. Mobiles in general (more commonly in some parts of the world than others) are on lower bandwidth connections and have less memory available than desktop devices, so yes, those extra kilobytes really do count.
+      </p>
+    </section>  
+    <section id="Offline_Service" class="main-section">
+      <header>Offline Service</header>
+      <p>
+        <code>Service workers explained</code><br>
+        Service Workers are a virtual proxy between the browser and the network. They finally fix issues that front-end developers have struggled with for years — most notably how to properly cache the assets of a website and make them available when the user’s device is offline.<br>
+
+They run on a separate thread from the main JavaScript code of our page, and don't have any access to the DOM structure. This introduces a different approach from traditional web programming — the API is non-blocking, and can send and receive communication between different contexts. You are able to give a Service Worker something to work on, and receive the result whenever it is ready using a Promise-based approach.<br>
+
+They can do a lot more than "just" offering offline capabilities, including handling notifications, performing heavy calculations on a separate thread, etc. Service workers are quite powerful as they can take control over network requests, modify them, serve custom responses retrieved from the cache, or synthesize responses completely.
+      </p>
+    <p>
+        <code>Offline First</code><br>
+The "offline first" — or "cache first" — pattern is the most popular strategy for serving content to the user. If a resource is cached and available offline, return it first before trying to download it from the server. If it isn’t in the cache already, download it and cache it for future usage.
+      </p>
+       </section>  
+    <section id="How_to_make_PWAs_installable" class="main-section">
+      <header>How to make PWAs installable</header>
+      <p>
+        <code>Requirements</code><br>
+      To make the web site installable, it needs the following things in place :
+      </p>
+      
+      <ul>
+        <li>A web manifest, with the correct fields filled in</li>
+        <li>The web site to be served from a secure (HTTPS) domain</li>
+        <li>An icon to represent the app on the device</li>
+        <li>A service worker registered, to allow the app to work offline (this is required only by Chrome for Android currently)</li>
+      </ul>
+       <p>
+        <code>Summary</code><br>
+    In this article, we learned about how we can make PWAs installable with a properly-configured web manifest, and how the user can then install the PWA with the "add to home screen" feature of their browser.<br>
+
+For more information on a2hs, be sure to read our Add to Home screen guide. Browser support is currently limited to Firefox for Android 58+, Mobile Chrome and Android Webview 31+, and Opera for Android 32+, but this should improve in the near future.<br>
+
+Now let's move to the last piece of the PWA puzzle: using push notifications to share announcements with the user, and to help the user re-engage with your app.
+    </section>  
+    
+  </div>
+</main>
